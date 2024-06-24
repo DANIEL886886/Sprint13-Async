@@ -69,8 +69,6 @@ function setActiveCrew(crewIndex) {
         console.error("Can not find crew index " + crewIndex);
         return;
     }
-    // console.log(crewEl);
-    // console.log(`crew-${crewIndex}`);
     crewEl.classList.add("active");
     extractCrewData(crewIndex);
 }
