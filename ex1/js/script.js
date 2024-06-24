@@ -43,98 +43,46 @@ function extractCrewData(crewIndex) {
         .catch((error) => console.error("Error reading JSON file:", error));
 }
 
+function renderCrewList() {
+    fetch("./data/data.json")
+        .then((response) => response.json())
+        .then((data) => {
+            const crewList = data.crew;
+            const crewListEl = document.querySelector("#crew-list")
+            crewList.forEach((crew, index) => {
+                const crewElHtml = `<a href="#"><button id="crew-${index}" class="crew-btn listbtn">⚪</button></a>`;
+                const crewEl = document.createElement("li");
+                crewEl.innerHTML = crewElHtml;
+                crewListEl.appendChild(crewEl);
+                crewEl.addEventListener("click", crewBtnEvenListener);
+            })
+            setActiveCrew(0);
+        })
+        .catch((error) => console.error("Error reading JSON file:", error));
+}
+
+function setActiveCrew(crewIndex) {
+    const crewEls = document.querySelectorAll(".crew-btn");
+    crewEls.forEach((el) => el.classList.remove("active"));
+    const crewEl = document.querySelector(`#crew-${crewIndex}`);
+    if (!crewEl) {
+        console.error("Can not find crew index " + crewIndex);
+        return;
+    }
+    // console.log(crewEl);
+    // console.log(`crew-${crewIndex}`);
+    crewEl.classList.add("active");
+    extractCrewData(crewIndex);
+}
+
+const crewBtnEvenListener = (event) => {
+    const crewEl = event.target;
+    const crewIndex = crewEl.id.replace("crew-", "");
+    setActiveCrew(crewIndex);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    
+    renderCrewList();
 
-    const addEventListeners = () => {
-        if (document.body.id === "crew-page") {
-            // CREW PAGE BUTTONS EVENT LISTENER
-            // DOUGLAS HURLEY BUTTON
-            const button02A = document.getElementById("btn-douglas");
-            // Mark Shuttleworth BUTTON...................................
-            const button02B = document.getElementById("btn-mark");
-            // Victor Glover BUTTON...................................
-            const button02C = document.getElementById("btn-victoria");
-            // Anousheh Ansari BUTTON...................................
-            const button02D = document.getElementById("btn-ansari");
-
-            const handleClick02A = () => {
-            extractCrewData(0);
-            button02A.style.color = "white";
-            button02B.style.color = "#8686866c";
-            button02C.style.color = "#8686866c";
-            button02D.style.color = "#8686866c";
-            };
-            const handleClick02B = () => {
-            extractCrewData(1);
-            button02A.style.color = "#8686866c";
-            button02B.style.color = "white";
-            button02C.style.color = "#8686866c";
-            button02D.style.color = "#8686866c";
-            };
-            const handleClick02C = () => {
-            extractCrewData(2);
-            button02A.style.color = "#8686866c";
-            button02B.style.color = "#8686866c";
-            button02C.style.color = "white";
-            button02D.style.color = "#8686866c";
-            };
-            const handleClick02D = () => {
-            extractCrewData(3);
-            button02A.style.color = "#8686866c";
-            button02B.style.color = "#8686866c";
-            button02C.style.color = "#8686866c";
-            button02D.style.color = "white";
-            };
-
-            button02A.addEventListener("click", handleClick02A);
-            button02B.addEventListener("click", handleClick02B);
-            button02C.addEventListener("click", handleClick02C);
-            button02D.addEventListener("click", handleClick02D);
-
-            // UNLOAD THE EVENT LISTENERS................................
-            window.addEventListener("beforeunload", () => {
-            button02A.removeEventListener("click", handleClick02A);
-            button02B.removeEventListener("click", handleClick02B);
-            button02C.removeEventListener("click", handleClick02C);
-            button02D.removeEventListener("click", handleClick02D);
-            });
-        
-        } else if (document.body.id === "destination-page") {
-            // PLANET PAGE BUTTONS EVENT LISTENER
-            // MOON BUTTON
-            const button01A = document.getElementById("moonbtn");
-            const handleClick01A = () => {
-                extractPlanetData(0);
-            };
-            button01A.addEventListener("click", handleClick01A);
-            // MARS BUTTON ...................................
-            const button01B = document.getElementById("marsbtn");
-            const handleClick01B = () => {
-                extractPlanetData(1);
-            };
-            button01B.addEventListener("click", handleClick01B);
-            // EUROPA BUTTON ..................................
-            const button01C = document.getElementById("europabtn");
-            const handleClick01C = () => {
-                extractPlanetData(2);
-            };
-            button01C.addEventListener("click", handleClick01C);
-            // TITAN BUTTON ...................................
-            const button01D = document.getElementById("titanbtn");
-            const handleClick01D = () => {
-                extractPlanetData(3);
-            };
-            button01D.addEventListener("click", handleClick01D);
-            // UNLOAD EVENT LISTENERS..........................
-            window.addEventListener("beforeunload", () => {
-                button02A.style.color = "";
-                button01A.removeEventListener("click", () => handleClick01A);
-                button01B.removeEventListener("click", () => handleClick01B);
-                button01C.removeEventListener("click", () => handleClick01C);
-                button01D.removeEventListener("click", () => handleClick01D);
-            });
-        }
-    };
-
-    addEventListeners();
 });

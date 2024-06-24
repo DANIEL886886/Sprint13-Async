@@ -80,8 +80,9 @@ main ul {
   font-size: 25px;
 }
 
-#btn-douglas{
-  color: white;
+.listbtn.active{
+  color:white;
+  cursor:pointer;
 }
 
 .crew-container {
