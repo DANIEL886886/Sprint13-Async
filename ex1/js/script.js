@@ -47,50 +47,75 @@ function extractCrewData(crewIndex) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // CREW PAGE BUTTONS EVENT LISTENER
-    //DOUGLAS HURLEY BUTTON
-    const button02A = document.getElementById("btn-douglas");
-    const handleClick02A = () => {
-        extractCrewData(0);
+    const addEventListeners = () => {
+        if (document.body.id === "crew-page") {
+            // CREW PAGE BUTTONS EVENT LISTENER
+            // DOUGLAS HURLEY BUTTON
+            const button02A = document.getElementById("btn-douglas");
+            const handleClick02A = () => {
+                extractCrewData(0);
+            };
+            button02A.addEventListener("click", handleClick02A);
+            // Mark Shuttleworth BUTTON ...................................
+            const button02B = document.getElementById("btn-mark");
+            const handleClick02B = () => {
+                extractCrewData(1);
+            };
+            button02B.addEventListener("click", handleClick02B);
+            // Victor Glover BUTTON ...................................
+            const button02C = document.getElementById("btn-victoria");
+            const handleClick02C = () => {
+                extractCrewData(2);
+            };
+            button02C.addEventListener("click", handleClick02C);
+            // Anousheh Ansari BUTTON ...................................
+            const button02D = document.getElementById("btn-ansari");
+            const handleClick02D = () => {
+                extractCrewData(3);
+            };
+            button02D.addEventListener("click", handleClick02D);
+            // UNLOAD THE EVENT LISTENERS................................
+            window.addEventListener("beforeunload", () => {
+                button02A.removeEventListener("click", handleClick02A);
+                button02B.removeEventListener("click", handleClick02B);
+                button02C.removeEventListener("click", handleClick02C);
+                button02D.removeEventListener("click", handleClick02D);
+            });
+        } else if (document.body.id === "destination-page") {
+            // PLANET PAGE BUTTONS EVENT LISTENER
+            // MOON BUTTON
+            const button01A = document.getElementById("moonbtn");
+            const handleClick01A = () => {
+                extractPlanetData(0);
+            };
+            button01A.addEventListener("click", handleClick01A);
+            // MARS BUTTON ...................................
+            const button01B = document.getElementById("marsbtn");
+            const handleClick01B = () => {
+                extractPlanetData(1);
+            };
+            button01B.addEventListener("click", handleClick01B);
+            // EUROPA BUTTON ..................................
+            const button01C = document.getElementById("europabtn");
+            const handleClick01C = () => {
+                extractPlanetData(2);
+            };
+            button01C.addEventListener("click", handleClick01C);
+            // TITAN BUTTON ...................................
+            const button01D = document.getElementById("titanbtn");
+            const handleClick01D = () => {
+                extractPlanetData(3);
+            };
+            button01D.addEventListener("click", handleClick01D);
+            // UNLOAD EVENT LISTENERS..........................
+            window.addEventListener("beforeunload", () => {
+                button01A.removeEventListener("click", () => handleClick01A);
+                button01B.removeEventListener("click", () => handleClick01B);
+                button01C.removeEventListener("click", () => handleClick01C);
+                button01D.removeEventListener("click", () => handleClick01D);
+            });
+        }
     };
-    button02A.addEventListener("click", handleClick02A);
-    // Mark Shuttleworth BUTTON ...................................
-    const button02B = document.getElementById("btn-mark");
-    const handleClick02B = () => {
-        extractCrewData(1);
-    };
-    button02B.addEventListener("click", handleClick02B);
-    // Victor Glover BUTTON ...................................
-    const button02C = document.getElementById("btn-victoria");
-    const handleClick02C = () => {
-        extractCrewData(2);
-    };
-    button02C.addEventListener("click", handleClick02C);
-    // Anousheh Ansari BUTTON ...................................
-    const button02D = document.getElementById("btn-ansari");
-    const handleClick02D = () => {
-        extractCrewData(3);
-    };
-    button02D.addEventListener("click", handleClick02D);
-    //UNLOAD THE EVENT LISTENERS................................
-    window.addEventListener("beforeunload", () => {
-        button02A.removeEventListener("click", handleClick);
-        button02B.removeEventListener("click", handleClick);
-        button02C.removeEventListener("click", handleClick);
-        button02D.removeEventListener("click", handleClick);
-    });
 
-    // PLANET PAGE BUTTONS EVENT LISTENER
-    //MOON BUTTON
-    const button01A = document.getElementById("moonbtn");
-    button01A.addEventListener("click", () => extractPlanetData(0));
-    // MARS BUTTON ...................................
-    const button01B = document.getElementById("marsbtn");
-    button01B.addEventListener("click", () => extractPlanetData(1));
-    // EUROPA BUTTON ...................................
-    const button01C = document.getElementById("europabtn");
-    button01C.addEventListener("click", () => extractPlanetData(2));
-    // TITANBUTTON ...................................
-    const button01D = document.getElementById("titanbtn");
-    button01D.addEventListener("click", () => extractPlanetData(3));
+    addEventListeners();
 });
