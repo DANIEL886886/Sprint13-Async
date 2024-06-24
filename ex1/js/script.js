@@ -43,8 +43,6 @@ function extractCrewData(crewIndex) {
         .catch((error) => console.error("Error reading JSON file:", error));
 }
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const addEventListeners = () => {
@@ -52,35 +50,55 @@ document.addEventListener("DOMContentLoaded", () => {
             // CREW PAGE BUTTONS EVENT LISTENER
             // DOUGLAS HURLEY BUTTON
             const button02A = document.getElementById("btn-douglas");
-            const handleClick02A = () => {
-                extractCrewData(0);
-            };
-            button02A.addEventListener("click", handleClick02A);
-            // Mark Shuttleworth BUTTON ...................................
+            // Mark Shuttleworth BUTTON...................................
             const button02B = document.getElementById("btn-mark");
-            const handleClick02B = () => {
-                extractCrewData(1);
-            };
-            button02B.addEventListener("click", handleClick02B);
-            // Victor Glover BUTTON ...................................
+            // Victor Glover BUTTON...................................
             const button02C = document.getElementById("btn-victoria");
-            const handleClick02C = () => {
-                extractCrewData(2);
-            };
-            button02C.addEventListener("click", handleClick02C);
-            // Anousheh Ansari BUTTON ...................................
+            // Anousheh Ansari BUTTON...................................
             const button02D = document.getElementById("btn-ansari");
-            const handleClick02D = () => {
-                extractCrewData(3);
+
+            const handleClick02A = () => {
+            extractCrewData(0);
+            button02A.style.color = "white";
+            button02B.style.color = "#8686866c";
+            button02C.style.color = "#8686866c";
+            button02D.style.color = "#8686866c";
             };
+            const handleClick02B = () => {
+            extractCrewData(1);
+            button02A.style.color = "#8686866c";
+            button02B.style.color = "white";
+            button02C.style.color = "#8686866c";
+            button02D.style.color = "#8686866c";
+            };
+            const handleClick02C = () => {
+            extractCrewData(2);
+            button02A.style.color = "#8686866c";
+            button02B.style.color = "#8686866c";
+            button02C.style.color = "white";
+            button02D.style.color = "#8686866c";
+            };
+            const handleClick02D = () => {
+            extractCrewData(3);
+            button02A.style.color = "#8686866c";
+            button02B.style.color = "#8686866c";
+            button02C.style.color = "#8686866c";
+            button02D.style.color = "white";
+            };
+
+            button02A.addEventListener("click", handleClick02A);
+            button02B.addEventListener("click", handleClick02B);
+            button02C.addEventListener("click", handleClick02C);
             button02D.addEventListener("click", handleClick02D);
+
             // UNLOAD THE EVENT LISTENERS................................
             window.addEventListener("beforeunload", () => {
-                button02A.removeEventListener("click", handleClick02A);
-                button02B.removeEventListener("click", handleClick02B);
-                button02C.removeEventListener("click", handleClick02C);
-                button02D.removeEventListener("click", handleClick02D);
+            button02A.removeEventListener("click", handleClick02A);
+            button02B.removeEventListener("click", handleClick02B);
+            button02C.removeEventListener("click", handleClick02C);
+            button02D.removeEventListener("click", handleClick02D);
             });
+        
         } else if (document.body.id === "destination-page") {
             // PLANET PAGE BUTTONS EVENT LISTENER
             // MOON BUTTON
@@ -109,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
             button01D.addEventListener("click", handleClick01D);
             // UNLOAD EVENT LISTENERS..........................
             window.addEventListener("beforeunload", () => {
+                button02A.style.color = "";
                 button01A.removeEventListener("click", () => handleClick01A);
                 button01B.removeEventListener("click", () => handleClick01B);
                 button01C.removeEventListener("click", () => handleClick01C);
